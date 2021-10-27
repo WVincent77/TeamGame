@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float verticalInput;
     public float speed = 10.0f;
     private float angle = 45;
+    //public GameObject bulletPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
         transform.Translate(Vector3.forward * verticalInput * Time.deltaTime * speed);
 
         //Rotation Controls
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             transform.Rotate(Vector3.up * angle);
         }
@@ -34,6 +35,12 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.Rotate(-Vector3.up * angle);
         }
+
+        //if (Input.GetKeyDown(KeyCode.X))
+        //{
+            // Launch a projectile from player
+            //Instantiate(bulletPrefab, transform.position, bulletPrefab.transform.rotation);
+        //}
     }
 }
     
