@@ -29,13 +29,13 @@ public class PlayerMovement2 : MonoBehaviour
         transform.Translate(Vector3.forward * verticalInput * Time.deltaTime * speed);
 
         //Rotation Controls
-        //if (Input.GetKeyDown(KeyCode.9)) 
+        if (Input.GetKeyDown(KeyCode.Keypad9) || (Input.GetKeyDown(KeyCode.Alpha9))) 
         {
-            //transform.Rotate(Vector3.up * angle);
+            transform.Rotate(Vector3.up * angle);
         }
-        //if (Input.GetKeyDown(KeyCode.7)) 
+        if (Input.GetKeyDown(KeyCode.Keypad7) || (Input.GetKeyDown(KeyCode.Alpha7))) 
         {
-            //transform.Rotate(-Vector3.up * angle);
+            transform.Rotate(-Vector3.up * angle);
         }
 
         //Keeps the player in bounds from -9 to 9 on X

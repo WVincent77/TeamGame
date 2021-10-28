@@ -35,5 +35,14 @@ public class BulletDestroy : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (transform.position.y > 1.6)
+        {
+            Destroy(gameObject);
+        }
+        else if (transform.position.y < .25)
+        {
+            Destroy(gameObject);
+        }
     }
 }
