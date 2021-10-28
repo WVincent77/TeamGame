@@ -8,7 +8,9 @@ public class PlayerMovement : MonoBehaviour
     public float verticalInput;
     public float speed = 10.0f;
     private float angle = 45;
-    //public GameObject bulletPrefab;
+
+    public float XRange = 9;
+    public float ZRange = 9;
 
     // Start is called before the first frame update
     void Start()
@@ -36,11 +38,27 @@ public class PlayerMovement : MonoBehaviour
             transform.Rotate(-Vector3.up * angle);
         }
 
-        //if (Input.GetKeyDown(KeyCode.X))
-        //{
-            // Launch a projectile from player
-            //Instantiate(bulletPrefab, transform.position, bulletPrefab.transform.rotation);
-        //}
+        //Keeps the player in bounds from -9 to 9 on X
+        if (transform.position.x < -XRange)
+        {
+            transform.position = new Vector3(-XRange, transform.position.y, transform.position.z);
+        }
+
+        if (transform.position.x > XRange)
+        {
+            transform.position = new Vector3(XRange, transform.position.y, transform.position.z);
+        }
+
+        //Keeps the player in bounds from -9 to 9 on Z
+        if (transform.position.z < -ZRange)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, -ZRange);
+        }
+
+        if (transform.position.z > ZRange)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, ZRange);
+        }
     }
 }
     
