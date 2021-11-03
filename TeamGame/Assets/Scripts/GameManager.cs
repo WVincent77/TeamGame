@@ -10,11 +10,15 @@ public class GameManager : MonoBehaviour
     public bool isGameActive;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timerText;
+    public TextMeshProUGUI gameOverText;
     public GameObject titleScreen;
+    public Button restartButton;
 
     private int score;
     private int time;
     private float spawnRate = 3.0f;
+    private float timedown = 1;
+    private float endtime = 0;
 
     //Spawning Zombies
     public GameObject[] zombiePrefabs;
@@ -29,13 +33,16 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         score = 0;
-        time = 300;
+        time = 150;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (time <= endtime)
+        {
+            GameOver();
+        }
     }
 
     //When the Game starts
@@ -46,6 +53,7 @@ public class GameManager : MonoBehaviour
         
         StartCoroutine(SpawnZombies());
         StartCoroutine(TimeCountdown(1));
+        timerText.text = "Time: " + time;
         titleScreen.gameObject.SetActive(false);
         
     }
@@ -53,7 +61,7 @@ public class GameManager : MonoBehaviour
     //Spawning the Zombies in
     IEnumerator SpawnZombies()
     {
-        while (isGameActive)
+        while (isGameActive && time >= 0)
         {
             yield return new WaitForSeconds(spawnRate);
 
@@ -82,9 +90,9 @@ public class GameManager : MonoBehaviour
     //Timer?
     IEnumerator TimeCountdown(int timeToSubtract)
     {
-        while (isGameActive)
+        while (isGameActive && time != 0)
         {
-            yield return
+            yield return new WaitForSeconds(timedown);
             time -= timeToSubtract;
             timerText.text = "Time: " + time;
         } 
@@ -95,5 +103,19 @@ public class GameManager : MonoBehaviour
     {
         score += scoreToAdd;
         scoreText.text = "Score: " + score;
+    }
+
+    //Game Over
+    public void GameOver()
+    {
+        isGameActive = false;
+        gameOverText.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
+    }
+
+    //Restart
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
