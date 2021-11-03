@@ -21,20 +21,20 @@ public class GameManager : MonoBehaviour
     private float spawnRangeX = 0f;
     private float spawnPosZ = 15;
     private float spanwPosY = 1.25f;
-    private float startDelay = 2;
-    private float spawnInterval = 3f;
+    //private float startDelay = 2;
+    //private float spawnInterval = 3f;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        score = 0;
+        time = 300;
     }
 
     // Update is called once per frame
     void Update()
     {
-        score = 0;
-        time = 300;
+        
     }
 
     //When the Game starts
@@ -42,10 +42,11 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = true;
         UpdateScore(0);
-        TimeCountdown(0);
+        
         StartCoroutine(SpawnZombies());
-
+        StartCoroutine(TimeCountdown(1));
         titleScreen.gameObject.SetActive(false);
+        
     }
 
     //Spawning the Zombies in
@@ -67,10 +68,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void TimeCountdown(int timeToSubtract)
+    IEnumerator TimeCountdown(int timeToSubtract)
     {
-        time -= timeToSubtract;
-        timerText.text = "Timer: " + time; 
+        while (isGameActive)
+        {
+            yield return
+            time -= timeToSubtract;
+            timerText.text = "Time: " + time;
+        } 
     }
 
     public void UpdateScore(int scoreToAdd)
