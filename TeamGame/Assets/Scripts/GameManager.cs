@@ -14,13 +14,20 @@ public class GameManager : MonoBehaviour
 
     private int score;
     private int time;
+    private float spawnRate = 3.0f;
+
+    //Spawning Zombies
+    public GameObject[] zombiePrefabs;
+    private float spawnRangeX = 0f;
+    private float spawnPosZ = 15;
+    private float spanwPosY = 1.25f;
+    private float startDelay = 2;
+    private float spawnInterval = 3f;
 
     // Start is called before the first frame update
     void Start()
     {
-        UpdateScore(0);
-        TimeCountdown(0);
-        time = 300;
+        
     }
 
     // Update is called once per frame
@@ -28,13 +35,36 @@ public class GameManager : MonoBehaviour
     {
         score = 0;
         time = 300;
+    }
+
+    //When the Game starts
+    public void StartGame()
+    {
+        isGameActive = true;
+        UpdateScore(0);
+        TimeCountdown(0);
+        StartCoroutine(SpawnZombies());
+
         titleScreen.gameObject.SetActive(false);
     }
 
-    public void StartGame()
+    //Spawning the Zombies in
+    IEnumerator SpawnZombies()
     {
-        UpdateScore(0);
-        TimeCountdown(0);
+        while (isGameActive)
+        {
+            yield return new WaitForSeconds(spawnRate);
+
+            //North Spawn
+            int NorthIndex = Random.Range(0, zombiePrefabs.Length);
+            Vector3 northPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), spanwPosY, spawnPosZ);
+            Instantiate(zombiePrefabs[NorthIndex], northPos, zombiePrefabs[NorthIndex].transform.rotation);
+
+            //South Spawn
+            int SouthIndex = Random.Range(0, zombiePrefabs.Length);
+            Vector3 southPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), spanwPosY, -spawnPosZ);
+            Instantiate(zombiePrefabs[SouthIndex], southPos, zombiePrefabs[SouthIndex].transform.rotation);
+        }
     }
 
     public void TimeCountdown(int timeToSubtract)
