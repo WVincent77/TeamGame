@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] zombiePrefabs;
     private float spawnRangeX = 0f;
     private float spawnPosZ = 15;
+    private float spawnRangeZ = 16;
     private float spanwPosY = 1.25f;
     //private float startDelay = 2;
     //private float spawnInterval = 3f;
@@ -65,9 +66,20 @@ public class GameManager : MonoBehaviour
             int SouthIndex = Random.Range(0, zombiePrefabs.Length);
             Vector3 southPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), spanwPosY, -spawnPosZ);
             Instantiate(zombiePrefabs[SouthIndex], southPos, zombiePrefabs[SouthIndex].transform.rotation);
+
+            //East Spawn
+            int EastIndex = Random.Range(0, zombiePrefabs.Length);
+            Vector3 eastPos = new Vector3(Random.Range(spawnPosZ, spawnRangeZ), spanwPosY, spawnRangeX);
+            Instantiate(zombiePrefabs[EastIndex], eastPos, zombiePrefabs[EastIndex].transform.rotation);
+
+            //West Spawn
+            int WestIndex = Random.Range(0, zombiePrefabs.Length);
+            Vector3 westPos = new Vector3(Random.Range(-spawnRangeZ, -spawnPosZ), spanwPosY, spawnRangeX);
+            Instantiate(zombiePrefabs[WestIndex], westPos, zombiePrefabs[WestIndex].transform.rotation);
         }
     }
 
+    //Timer?
     IEnumerator TimeCountdown(int timeToSubtract)
     {
         while (isGameActive)
@@ -78,6 +90,7 @@ public class GameManager : MonoBehaviour
         } 
     }
 
+    //Score
     public void UpdateScore(int scoreToAdd)
     {
         score += scoreToAdd;
