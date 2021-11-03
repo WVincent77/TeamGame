@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         score = 0;
-        time = 150;
+        time = 10;
     }
 
     // Update is called once per frame

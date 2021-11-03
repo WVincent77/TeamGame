@@ -12,52 +12,57 @@ public class PlayerMovement2 : MonoBehaviour
     public float XRange = 9;
     public float ZRange = 9;
 
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Inputs
-        horizontalInput = Input.GetAxis("AltHorizontal");
-        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
-
-        verticalInput = Input.GetAxis("AltVertical");
-        transform.Translate(Vector3.forward * verticalInput * Time.deltaTime * speed);
-
-        //Rotation Controls
-        if (Input.GetKeyDown(KeyCode.Keypad9) || (Input.GetKeyDown(KeyCode.Alpha9))) 
+        if (gameManager.isGameActive)
         {
-            transform.Rotate(Vector3.up * angle);
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad7) || (Input.GetKeyDown(KeyCode.Alpha7))) 
-        {
-            transform.Rotate(-Vector3.up * angle);
-        }
+            //Inputs
+            horizontalInput = Input.GetAxis("AltHorizontal");
+            transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
 
-        //Keeps the player in bounds from -9 to 9 on X
-        if (transform.position.x < -XRange)
-        {
-            transform.position = new Vector3(-XRange, transform.position.y, transform.position.z);
-        }
+            verticalInput = Input.GetAxis("AltVertical");
+            transform.Translate(Vector3.forward * verticalInput * Time.deltaTime * speed);
 
-        if (transform.position.x > XRange)
-        {
-            transform.position = new Vector3(XRange, transform.position.y, transform.position.z);
-        }
+            //Rotation Controls
+            if (Input.GetKeyDown(KeyCode.Keypad9) || (Input.GetKeyDown(KeyCode.Alpha9)))
+            {
+                transform.Rotate(Vector3.up * angle);
+            }
+            if (Input.GetKeyDown(KeyCode.Keypad7) || (Input.GetKeyDown(KeyCode.Alpha7)))
+            {
+                transform.Rotate(-Vector3.up * angle);
+            }
 
-        //Keeps the player in bounds from -9 to 9 on Z
-        if (transform.position.z < -ZRange)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, -ZRange);
-        }
+            //Keeps the player in bounds from -9 to 9 on X
+            if (transform.position.x < -XRange)
+            {
+                transform.position = new Vector3(-XRange, transform.position.y, transform.position.z);
+            }
 
-        if (transform.position.z > ZRange)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, ZRange);
+            if (transform.position.x > XRange)
+            {
+                transform.position = new Vector3(XRange, transform.position.y, transform.position.z);
+            }
+
+            //Keeps the player in bounds from -9 to 9 on Z
+            if (transform.position.z < -ZRange)
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y, -ZRange);
+            }
+
+            if (transform.position.z > ZRange)
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y, ZRange);
+            }
         }
     }
 }

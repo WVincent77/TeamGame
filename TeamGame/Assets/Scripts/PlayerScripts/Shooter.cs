@@ -6,20 +6,24 @@ public class Shooter : MonoBehaviour
 {
 
     public GameObject shot;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X))
+        if (gameManager.isGameActive)
         {
-            // Launch a projectile from player
-            Instantiate(shot, transform.position, transform.rotation);
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                // Launch a projectile from player
+                Instantiate(shot, transform.position, transform.rotation);
+            }
         }
     }
 }
