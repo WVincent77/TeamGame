@@ -5,7 +5,7 @@ using UnityEngine;
 public class SouthSpawn : MonoBehaviour
 {
     public GameObject[] zombiePrefabs;
-    private float spawnRangeX = 1.5f;
+    private float spawnRangeX = 0;
     private float spawnPosZ = 15;
     private float spanwPosY = 1.25f;
     private float startDelay = 2;
