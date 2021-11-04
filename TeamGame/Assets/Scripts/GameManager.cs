@@ -36,8 +36,13 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false;
         score = 100;
         time = 150;
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            DifficultySelect();
+        }
     }
 
     // Update is called once per frame
@@ -51,6 +56,16 @@ public class GameManager : MonoBehaviour
         if (score <= endtime)
         {
             GameOver();
+        }
+
+        if (Input.GetButtonUp("Cancel"))
+        {
+            Application.Quit();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            RestartGame();
         }
     }
 
@@ -142,5 +157,6 @@ public class GameManager : MonoBehaviour
         regularButton.gameObject.SetActive(true);
         hordeButton.gameObject.SetActive(true);
         titleScreen.gameObject.SetActive(false);
+
     }
 }

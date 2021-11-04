@@ -20,7 +20,17 @@ public class DifficultyButtons : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            difficulty = 1;
+            gameManager.StartGame(difficulty);
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            difficulty = 2;
+            gameManager.StartGame(difficulty);
+        }
     }
 
     void SetDifficulty()
