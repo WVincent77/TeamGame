@@ -41,7 +41,7 @@ public class EnemyMovemnet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (gameManager.isGameActive)
+        if (gameManager.isGameActive && other.gameObject == player)
         {
             gameManager.UpdateScore(-5);
         }

@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public Button restartButton;
     public TextMeshProUGUI victoryText;
     public Button victoryButton;
+    public Button regularButton;
+    public Button hordeButton;
 
     private int score;
     private int time;
@@ -53,16 +55,18 @@ public class GameManager : MonoBehaviour
     }
 
     //When the Game starts
-    public void StartGame()
+    public void StartGame(int difficulty)
     {
+        spawnRate /= difficulty;
         isGameActive = true;
         UpdateScore(0);
         
         StartCoroutine(SpawnZombies());
         StartCoroutine(TimeCountdown(1));
         timerText.text = "Time: " + time;
-        titleScreen.gameObject.SetActive(false);
-        
+        regularButton.gameObject.SetActive(false);
+        hordeButton.gameObject.SetActive(false);
+
     }
 
     //Spawning the Zombies in
@@ -131,5 +135,12 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void DifficultySelect()
+    {
+        regularButton.gameObject.SetActive(true);
+        hordeButton.gameObject.SetActive(true);
+        titleScreen.gameObject.SetActive(false);
     }
 }
