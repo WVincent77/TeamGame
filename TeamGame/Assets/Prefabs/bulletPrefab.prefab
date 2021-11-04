@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 855ba245b57b54842841f0744c4033bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointValue: 5
+  pointValue: 0
 --- !u!54 &-3182029718957881439
 Rigidbody:
   m_ObjectHideFlags: 0
