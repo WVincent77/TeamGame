@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 7901729945764546849}
   - component: {fileID: 7829105985131801863}
   m_Layer: 0
-  m_Name: TankZombieExport
+  m_Name: Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
