@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI gameOverText;
     public GameObject titleScreen;
     public Button restartButton;
+    public TextMeshProUGUI victoryText;
+    public Button victoryButton;
 
     private int score;
     private int time;
@@ -25,14 +27,14 @@ public class GameManager : MonoBehaviour
     private float spawnRangeX = 0f;
     private float spawnPosZ = 15;
     private float spawnRangeZ = 16;
-    private float spanwPosY = 1.25f;
+    private float spanwPosY = 1f;
     //private float startDelay = 2;
     //private float spawnInterval = 3f;
 
     // Start is called before the first frame update
     void Start()
     {
-        score = 0;
+        score = 100;
         time = 150;
     }
 
@@ -40,6 +42,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (time <= endtime)
+        {
+            Victory();
+        }
+
+        if (score <= endtime)
         {
             GameOver();
         }
@@ -102,7 +109,7 @@ public class GameManager : MonoBehaviour
     public void UpdateScore(int scoreToAdd)
     {
         score += scoreToAdd;
-        scoreText.text = "Score: " + score;
+        scoreText.text = "Health: " + score;
     }
 
     //Game Over
@@ -111,6 +118,13 @@ public class GameManager : MonoBehaviour
         isGameActive = false;
         gameOverText.gameObject.SetActive(true);
         restartButton.gameObject.SetActive(true);
+    }
+
+    public void Victory()
+    {
+        isGameActive = false;
+        victoryText.gameObject.SetActive(true);
+        victoryButton.gameObject.SetActive(true);
     }
 
     //Restart

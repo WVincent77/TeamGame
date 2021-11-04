@@ -8,13 +8,14 @@ public class EnemyMovemnet : MonoBehaviour
     private Rigidbody zombieRB;
     private GameObject player;
     private GameObject[] players;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
         zombieRB = GetComponent<Rigidbody>();
-        
 
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         players = GameObject.FindGameObjectsWithTag("Player");
     }
 
@@ -36,8 +37,13 @@ public class EnemyMovemnet : MonoBehaviour
 
         Vector3 lookDirection = (player.transform.position - transform.position).normalized;
         zombieRB.AddForce(lookDirection * speed);
+    }
 
-
-       
+    void OnTriggerEnter(Collider other)
+    {
+        if (gameManager.isGameActive)
+        {
+            gameManager.UpdateScore(-5);
+        }
     }
 }

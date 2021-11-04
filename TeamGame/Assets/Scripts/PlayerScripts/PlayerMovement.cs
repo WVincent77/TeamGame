@@ -63,6 +63,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 transform.position = new Vector3(transform.position.x, transform.position.y, ZRange);
             }
+
+        if (gameManager.isGameActive == false)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
