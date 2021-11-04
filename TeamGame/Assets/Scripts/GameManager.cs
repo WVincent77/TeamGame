@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     private int score;
     private int time;
-    private float spawnRate = 3.0f;
+    private float spawnRate = 1.5f;
     private float timedown = 1;
     private float endtime = 0;
 
